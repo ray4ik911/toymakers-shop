@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToyMakers Shop</title>
+    <meta
+      name="description"
+      content="Анимированный интернет-магазин 3D-печатных товаров ToyMakers с каталогом, корзиной, авторизацией и оформлением заказа."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <div class="page-grid" aria-hidden="true"></div>
+    <div class="page-orb page-orb-left" aria-hidden="true"></div>
+    <div class="page-orb page-orb-right" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner shell">
+        <a class="brand" href="#top" aria-label="ToyMakers Shop">
+          <span class="brand__badge">TM</span>
+          <span class="brand__copy">
+            <strong>ToyMakers</strong>
+            <small>3D printed shop</small>
+          </span>
+        </a>
+
+        <nav class="top-nav" aria-label="Основная навигация">
+          <a href="#catalog">Каталог</a>
+          <a href="#process">Как это работает</a>
+          <a href="#about">Почему мы</a>
+        </nav>
+
+        <div class="top-actions">
+          <button class="ghost-button" id="authOpenButton" type="button">
+            <span id="authButtonText">Войти</span>
+          </button>
+          <button class="cart-button" id="cartToggleButton" type="button">
+            <span>Корзина</span>
+            <span class="cart-button__count" id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell reveal-section">
+        <div class="hero__copy">
+          <p class="eyebrow">Авторские 3D-товары с WB-каталогом</p>
+          <h1>Интернет-магазин 3D-печатных вещей, которые хочется трогать, дарить и собирать.</h1>
+          <p class="hero__lead">
+            ToyMakers превращает пластик в яркие брелоки, фигурки и интерьерные мелочи.
+            На витрине уже подтянуты реальные товары, описания и фото из вашего каталога Wildberries.
+          </p>
+
+          <div class="hero__actions">
+            <a class="primary-button" href="#catalog">Смотреть каталог</a>
+            <button class="secondary-button" id="heroCheckoutButton" type="button">
+              Оформить заказ
+            </button>
+          </div>
+
+          <div class="hero-stats" id="heroStats"></div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero-panel">
+            <div class="hero-panel__chrome">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div id="heroProductCard" class="hero-product"></div>
+            <div class="hero-panel__footer">
+              <div>
+                <strong>Печать по слоям</strong>
+                <p>PLA-пластик, насыщенные цвета, выразительные формы.</p>
+              </div>
+              <span class="pill">WB sync</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="marquee-band">
+        <div class="marquee-track">
+          <span>3D printed</span>
+          <span>новые магниты</span>
+          <span>подвижные брелоки</span>
+          <span>готово к подарку</span>
+          <span>авторские фигурки</span>
+          <span>ToyMakers</span>
+          <span>3D printed</span>
+          <span>новые магниты</span>
+          <span>подвижные брелоки</span>
+          <span>готово к подарку</span>
+        </div>
+      </section>
+
+      <section class="catalog shell reveal-section" id="catalog">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Каталог</p>
+            <h2>Товары из вашего каталога Wildberries</h2>
+          </div>
+          <p class="section-heading__text">
+            Фильтруйте подборку, открывайте карточки и добавляйте в корзину без перехода на маркетплейс.
+          </p>
+        </div>
+
+        <div class="catalog-toolbar">
+          <label class="search-field">
+            <span>Поиск</span>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Например, скелет, сердце, магнит..."
+              autocomplete="off"
+            />
+          </label>
+
+          <div class="filter-row" id="filterRow" aria-label="Фильтры каталога"></div>
+        </div>
+
+        <div class="catalog-meta" id="catalogMeta"></div>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+
+      <section class="process shell reveal-section" id="process">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Как это работает</p>
+            <h2>Путь от клика до готового заказа</h2>
+          </div>
+          <p class="section-heading__text">
+            Простая воронка для клиента: авторизация, корзина, подтверждение и хранение заказа в профиле браузера.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <span class="process-card__index">01</span>
+            <h3>Выберите товар</h3>
+            <p>Смотрите реальные карточки из каталога WB, быстро фильтруйте и открывайте подробности.</p>
+          </article>
+          <article class="process-card">
+            <span class="process-card__index">02</span>
+            <h3>Соберите корзину</h3>
+            <p>Меняйте количество, сразу видьте итог и не теряйте выбранное между сессиями.</p>
+          </article>
+          <article class="process-card">
+            <span class="process-card__index">03</span>
+            <h3>Авторизуйтесь</h3>
+            <p>Локальный профиль хранит имя, почту и историю заказов для быстрых повторных покупок.</p>
+          </article>
+          <article class="process-card">
+            <span class="process-card__index">04</span>
+            <h3>Оформите заказ</h3>
+            <p>Заполните доставку, способ получения и комментарий. Заказ сохранится прямо на сайте.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="about shell reveal-section" id="about">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Почему мы</p>
+            <h2>Сайт, который ощущается как живая мастерская</h2>
+          </div>
+          <p class="section-heading__text">
+            Здесь нет скучной витрины: мы смешали анимации, яркий фон и акцент на фактуру 3D-печати, чтобы каталог выглядел современно и по-настоящему вашим.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>Каталог синхронизирован с WB</h3>
+            <p>Товары, описания, цены и фото подготовлены на основе вашего бренда ToyMakers.</p>
+          </article>
+          <article class="about-card">
+            <h3>Акцент на эмоцию</h3>
+            <p>Градиенты, глубина, динамика и крупная типографика делают витрину не шаблонной, а характерной.</p>
+          </article>
+          <article class="about-card">
+            <h3>Готов к развитию</h3>
+            <p>Каталог собирается отдельным скриптом, а интерфейс можно дальше расширять под оплату, CRM и админку.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell site-footer__inner">
+        <div>
+          <strong>ToyMakers Shop</strong>
+          <p>3D-печатные брелоки, магниты и фигурки с ярким характером.</p>
+        </div>
+        <div class="site-footer__links">
+          <a href="#catalog">Каталог</a>
+          <a href="#process">Оформление</a>
+          <a href="#top">Наверх</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="overlay" id="overlay" hidden></div>
+
+    <aside class="drawer" id="cartDrawer" aria-hidden="true">
+      <div class="drawer__header">
+        <div>
+          <p class="eyebrow">Корзина</p>
+          <h3>Ваш заказ</h3>
+        </div>
+        <button class="icon-button" id="cartCloseButton" type="button" aria-label="Закрыть корзину">
+          ×
+        </button>
+      </div>
+      <div class="drawer__body" id="cartItems"></div>
+      <div class="drawer__footer">
+        <div class="summary-row">
+          <span>Итого</span>
+          <strong id="cartTotal">0 ₽</strong>
+        </div>
+        <button class="primary-button drawer__action" id="cartCheckoutButton" type="button">
+          Перейти к оформлению
+        </button>
+      </div>
+    </aside>
+
+    <section class="modal" id="productModal" aria-hidden="true">
+      <div class="modal__dialog modal__dialog--product">
+        <button class="icon-button modal__close" data-close-modal="product" type="button" aria-label="Закрыть">
+          ×
+        </button>
+        <div class="product-modal__content" id="productModalContent"></div>
+      </div>
+    </section>
+
+    <section class="modal" id="authModal" aria-hidden="true">
+      <div class="modal__dialog">
+        <button class="icon-button modal__close" data-close-modal="auth" type="button" aria-label="Закрыть">
+          ×
+        </button>
+        <div class="modal__copy">
+          <p class="eyebrow">Профиль</p>
+          <h3 id="authModalTitle">Войти в ToyMakers Shop</h3>
+          <p>Создайте локальный профиль покупателя, чтобы быстро оформлять заказы и хранить историю.</p>
+        </div>
+        <form class="stack-form" id="authForm">
+          <label>
+            <span>Имя</span>
+            <input name="name" type="text" placeholder="Как к вам обращаться" required />
+          </label>
+          <label>
+            <span>E-mail</span>
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            <span>Телефон</span>
+            <input name="phone" type="tel" placeholder="+7 (999) 123-45-67" />
+          </label>
+          <button class="primary-button" type="submit">Сохранить профиль</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="modal" id="checkoutModal" aria-hidden="true">
+      <div class="modal__dialog modal__dialog--wide">
+        <button class="icon-button modal__close" data-close-modal="checkout" type="button" aria-label="Закрыть">
+          ×
+        </button>
+        <div class="checkout-layout">
+          <div>
+            <div class="modal__copy">
+              <p class="eyebrow">Оформление заказа</p>
+              <h3>Почти готово</h3>
+              <p>Подтвердите способ получения, контакты и комментарий к заказу.</p>
+            </div>
+            <form class="stack-form" id="checkoutForm">
+              <label>
+                <span>Получатель</span>
+                <input name="customerName" type="text" required />
+              </label>
+              <label>
+                <span>E-mail</span>
+                <input name="customerEmail" type="email" required />
+              </label>
+              <label>
+                <span>Телефон</span>
+                <input name="customerPhone" type="tel" required />
+              </label>
+              <label>
+                <span>Способ получения</span>
+                <select name="deliveryMethod">
+                  <option value="delivery">Курьером</option>
+                  <option value="pickup">Самовывоз</option>
+                </select>
+              </label>
+              <label>
+                <span>Адрес или пункт выдачи</span>
+                <textarea name="address" rows="3" placeholder="Город, улица, дом или удобный пункт выдачи" required></textarea>
+              </label>
+              <label>
+                <span>Комментарий</span>
+                <textarea name="comment" rows="3" placeholder="Например, нужен подарок или другая расцветка"></textarea>
+              </label>
+              <button class="primary-button" type="submit">Подтвердить заказ</button>
+            </form>
+          </div>
+          <aside class="checkout-summary">
+            <h4>Состав заказа</h4>
+            <div id="checkoutItems" class="checkout-summary__items"></div>
+            <div class="summary-row">
+              <span>Всего</span>
+              <strong id="checkoutTotal">0 ₽</strong>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+    <script charset="utf-8" src="./data/products.js"></script>
+    <script charset="utf-8" src="./app.js"></script>
+  </body>
+</html>
