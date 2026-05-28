@@ -690,16 +690,28 @@
   }
 
   function setupRevealAnimations() {
-    const sections = document.querySelectorAll(".reveal-section");
+    const sections = Array.from(document.querySelectorAll(".reveal-section"));
+    if (!sections.length) return;
+
+    // Large sections like the product catalog can be taller than the viewport,
+    // so ratio-based thresholds may never be reached on mobile screens.
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach((section) => section.classList.add("is-visible"));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.18 },
+      {
+        threshold: 0,
+        rootMargin: "0px 0px -12% 0px",
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
